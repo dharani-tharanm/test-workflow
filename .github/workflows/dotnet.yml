@@ -24,3 +24,17 @@ jobs:
       run: dotnet restore TodoApp/TodoApp.csproj
     - name: Build
       run: dotnet build TodoApp/TodoApp.csproj --no-restore
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dontnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Test
+      run: dotnet test TodoApp.Tests/TodoApp.Tests.csproj --no-build --verbosity normal
+      
+  
