@@ -1,0 +1,83 @@
+﻿@model List<TodoApp.Models.Todo>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <h3>Lets make change</h3>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/Background.jpg');
+            background-size: cover;
+        }
+
+        .container {
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .btn-blue {
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .btn-green {
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        async function markAsDone(taskId) {
+            const confirmed = confirm("Make sure your task is completed.");
+            if (confirmed) {
+                try {
+                    const response = await fetch(`/Todo/Delete/${taskId}`, { method: 'POST' });
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    window.location.reload();
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                    alert('Error marking task as done. Please try again later.');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Todo List</h2>
+        <a asp-action="Create" class="btn btn-blue">Add New Task</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in Model)
+                {
+                    <tr>
+                        <td>@task.Description</td>
+                        <td>
+                            <button class="btn btn-green" onclick="markAsDone(@task.Id)">Mark as Done</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

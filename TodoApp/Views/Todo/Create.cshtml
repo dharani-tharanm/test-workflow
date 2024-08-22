@@ -1,0 +1,43 @@
+﻿@model TodoApp.Models.Todo
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/Background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Add New Task</h2>
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Task Description (max 50 words)</label>
+                <textarea asp-for="Description" class="form-control" maxlength="250"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label">End Time</label>
+                <input asp-for="EndTime" class="form-control" type="datetime-local" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
