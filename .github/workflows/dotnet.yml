@@ -21,6 +21,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore TodoApp.csproj
+      run: dotnet restore TodoApp/TodoApp.csproj
     - name: Build
-      run: dotnet build TodoApp.csproj --no-restore
+      run: dotnet build TodoApp/TodoApp.csproj --no-restore
