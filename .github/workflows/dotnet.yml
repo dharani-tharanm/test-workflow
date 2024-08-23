@@ -18,7 +18,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore TodoApp/TodoApp.csproj
     - name: .NET Build
-      run: dotnet build TodoApp.Tests/TodoApp.Tests.csproj --no-restore
+      run: dotnet build TodoApp/TodoApp.csproj --no-restore
 
   test: 
     runs-on: ubuntu-latest
