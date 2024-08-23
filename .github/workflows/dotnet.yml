@@ -28,4 +28,4 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
     - name: Test
-      run: dotnet run TodoApp/TodoApp.csproj --no-build --verbosity normal
+      run: dotnet run TodoApp.Tests/TodoApp.Tests.csproj --no-build --verbosity normal
