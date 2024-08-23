@@ -1,10 +1,5 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-# New comment needed:
-
-name: .NET
-
-on:
+name: .NET TodoApp
+on: 
   push:
     branches: [ "main" ]
   pull_request:
@@ -12,8 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
 
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -22,18 +17,15 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore TodoApp/TodoApp.csproj
-    - name: Build
-      run: dotnet build TodoApp/TodoApp.csproj --no-restore
+    - name: .NET Build
+      run: dotnet build TodoApp.Tests/TodoApp.Tests.csproj --no-restore
 
-  test:
+  test: 
     runs-on: ubuntu-latest
     needs: build
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      uses: actions/setup-dotnet@v1
     - name: Test
-      run: dotnet test TodoApp.Tests/TodoApp.Tests.csproj --no-build --verbosity normal
+      run: dotnet run TodoApp/TodoApp.csproj --no-build --verbosity normal
